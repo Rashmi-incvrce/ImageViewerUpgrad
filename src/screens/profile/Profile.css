@@ -1,104 +1,22 @@
-.Headercontainer{
-    background-color: white;
-   height: auto;
+.profile-detail .MuiAvatar-circle {
+    width: 150px;
+    height: 150px;
+}
+
+.image-grid {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.modal {
     display: flex;
-    flex-direction: row;
-   justify-content: center;
-   margin-top: 10px;
-   margin-bottom: 20px;
-}
-
-.headerlogo{
-  align-items: center;
-  /* border: 1px solid black; */
-  display: flex;
-  justify-content: flex-end;
-  height: auto;
-  width: 41%;
-  margin-right: 3%;
-
-}
-
-.headercontent{    
-  align-items: center;
-  /* border: 1px solid black; */
-  display: flex;
-  justify-content: flex-start;
-  height: auto;
-  width: 70%;
-}
-.profilepic{
-    margin: 50px;
-    vertical-align: middle;
-}
-
-.child {
-    /* border: 1px solid black; */
-    height: 100px;
-    width: 100px;
-  }
-  .childs1{
-    width: 70%;
-    height: auto;
-  }
-
-  .child1 {
-    border: 1px solid black;
-    height: 50px;
-    width: auto;
-    margin-left: 0px;
-  }
-
-  .instapics{
-      cursor: pointer;
-  }
-
-  .aligned { 
-    display: flex; 
-    align-items: center; 
-} 
-   
-.spantext { 
-    padding: 10px; 
-} 
-
-.aligneditems { 
-  display: flex; 
-  align-items: center; 
-} 
-
-.userpostsdata{
-  margin-right: 20%;
-}
-
-
-
-@media screen and (max-width: 600px) {
-  .Headercontainer{
-    /* background-color: red; */
-   height: auto;
-    display: flex;
-    flex-direction: row;
-   justify-content: center;
-   margin-top: 0px;
-  width: 100%;
-}
-
-  .headercontent{    
     align-items: center;
-    /* border: 1px solid black; */
-    display: flex;
-    justify-content: flex-start;
-    height: 250px;
-    width:auto;
-  }
+    justify-content: center;
+}
 
-  .childs1{
-    /* width: auto; */
-    height: auto;
-  }
-  .userpostsdata{
-    margin-right: 5%;
-  }
-  
+.modal-content {
+    background-color: white;
+    border-radius: 2%;
 }

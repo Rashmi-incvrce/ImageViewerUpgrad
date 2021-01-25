@@ -1,46 +1,13 @@
-/* .logincontainer{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;    
-    background-color: yellow;
+.login-card {
+    width: 30%;
+    margin: auto;
+    padding: 2%;
 }
-.card{
-    margin: 15px;
-    display: block;
-    text-align: center;
-    background-color: red;
-} */
-.logincontainer {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 30%;    
-    margin-top: 20px;
-  }
-  .card{
-    display: block;
-    width:100%;        
-  }
 
-  h2{
-      text-transform: uppercase;
-  }
-
-  
-.dispNone {
+.hide {
     display: none;
 }
 
-.dispBlock {
+.show {
     display: block;
-}
-
-.red {
-    font-weight: bold;
-    color: red;
-}
-
-#errormsg{
-    font-weight: bold;
 }

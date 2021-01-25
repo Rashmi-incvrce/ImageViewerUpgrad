@@ -1,11 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import Controller from './common/Controller';
 import './index.css';
-import Login from './screens/login/Login';
-import Home from './screens/home/Home';
-import Controller from './Controller';
 
-ReactDOM.render(  
-    <Controller></Controller>,   
-    document.getElementById('root')
+ReactDOM.render(
+    <BrowserRouter><Controller /></BrowserRouter>, document.getElementById('root')
 );

@@ -1,42 +1,24 @@
-.maincontainer{
-    margin: auto;
-    width: 80%;    
-    padding: 20px;
-    
+.post {
+    height: 45%;
+    width: 45%;
+    min-height: 400px;
+    min-width: 400px;
+    margin: 2%;
 }
 
-.MuiIconButton-update-root {
-       /* flex: 0 0 auto; */
-    /* color: rgba(0, 0, 0, 0.54); */
-    /* padding: 12px; */
-    /* overflow: visible; */
-    /* font-size: 1.5rem; */
-    /* text-align: center; */
-    /* transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; */
-    /* border-radius: 50%;*/
-    padding: 0px !important;
-    font-size: 1rem !important;
-    text-align: center !important;
-    justify-content: center;
-    color:black !important;
-   
+.post-content,
+.post-footer,
+.post-header {
+    margin: 2%;
+    padding: 2%;
 }
 
-.likescontent{
-   /* position: absolute !important; */
-   /* padding-top: 4px !important; */
-   padding-left: 10px !important;
-   
-}
-.displayusername{
-    font-weight: bold;
+.text-bold {
+    font-size: 1rem;
+    font-weight: 750;
 }
 
-.commentbox{
-    padding-left: 4px !important;
-}
-
-.MuiGrid-spacing-xs-3 {
-    width: calc(100% + 24px)  !important;
-    margin: 0  !important;
+.text-lite {
+    font-size: 0.8rem;
+    font-weight: 500;
 }
