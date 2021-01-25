@@ -1,0 +1,21 @@
+.app-header {
+    background-color: #263238;
+    height: 32px;
+    padding: 10px ;
+}
+
+
+.side-logo{
+    color: white;
+    height:  18px;
+    vertical-align: middle;
+}
+
+.after-login{
+     float: right;
+     display: flex;
+}
+
+.greyed {
+  background-color: grey;
+}
