@@ -31,11 +31,11 @@ export default class Login extends Component {
         this.state.passwordVal === "" ? this.setState({ passwordRequiredText: "show" }) : this.setState({ passwordRequiredText: "hide" });
 		
 		document.getElementById("ip-uname").focus();
-        if (this.state.usernameVal == Config.login.username && this.state.passwordVal == Config.login.password) {
+        if (this.state.usernameVal === Config.login.username && this.state.passwordVal === Config.login.password) {
             window.sessionStorage.setItem('access-token', Config.auth["access-token"]);
 			this.props.history.push('/home/');
         }
-        else if (this.state.usernameVal != "" && this.state.passwordVal != "") {
+        else if (this.state.usernameVal !== "" && this.state.passwordVal !== "") {
             //document.getElementById("errormsg").innerHTML = "Incorrect username and/or password";
 			this.setState({ incorrectLoginInfoText: "show" })
         }
