@@ -5,7 +5,7 @@ var Config =
         "password": "admin"
     },
     "auth": {
-        "access-token": "IGQVJWOGNVcU5KQTZAqODlVRW1BekVXLXd1V3A0cnJreUxJYUtlV0lJNUlBZAmM1UzlrOHZADek51ZAXdRbVkybFRuZA2V3dzFHUGVkOU5zWjBlYVhRTXU5WWtVS2lrQkMtWGtONUpObXlKdUhtaGZA4U1BhS1BjY29xaEZAac0lV"
+        "access-token": "IGQVJYOGNpdFJYbEpYUzRwdTdDbzVBNWVjTzlRQWExOVNaRUpOcEU4VWM2T1RFb0VmSFdkY0FBdW00LWItZAEdyUmRmbGY1bWVMRGV2TUtUdGR5ZAFk2SlQweWN4ZAXJXM2N0U2xZATXZANZAmVCWGt2S0hGSHJvUF9yWndoRjFV"
     },
     "api": 
     {

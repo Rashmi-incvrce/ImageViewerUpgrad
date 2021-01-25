@@ -1,0 +1,17 @@
+
+.dispNone {
+    display: none;
+}
+
+.dispBlock {
+    display: block;
+}
+
+.red {
+    font-weight: bold;
+    color: red;
+}
+
+#errormsg{
+    font-weight: bold;
+}

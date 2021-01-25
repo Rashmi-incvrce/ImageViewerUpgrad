@@ -1,252 +1,206 @@
 import React, { Component } from 'react';
 import './Header.css';
-import InputBase from '@material-ui/core/InputBase';
+import Button from '@material-ui/core/Button';
+import profile_picture from '../../assets/profilelogo.png';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
-import { fade } from '@material-ui/core/styles';
-import { withStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
+import TextField from '@material-ui/core/TextField';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FormControl from '@material-ui/core/FormControl';
+import InputBase from '@material-ui/core/InputBase';
+import IconButton from "@material-ui/core/IconButton";
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import Popper from '@material-ui/core/Popper';
+import Paper from '@material-ui/core/Paper';
+import MenuList from '@material-ui/core/MenuList';
+import Grow from '@material-ui/core/Grow';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import { Divider, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import Login from '../../screens/login/Login';
+import { hashHistory } from 'react-router';
 
-
-const styles = (theme) => ({
- 
-    search: {
-      position: 'relative',
-      borderRadius: '4px',
-      backgroundColor: fade(theme.palette.common.white, 0.15),
-      '&:hover': {
-        backgroundColor: '#c0c0c0',
-      },
-      marginRight: theme.spacing(2),
-      marginLeft: 0,
-      width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(3),
-        width: '300px',
-      },
-      float: 'right'
+const styles = theme => ({
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
     },
-    searchIcon: {
-      padding: theme.spacing(0, 2),
-      height: '100%',
-      position: 'absolute',
-      pointerEvents: 'none',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
+    margin: {
+        margin: theme.spacing(1),
     },
-    inputRoot: {
-      color: 'inherit',
-    },
-    inputInput: {
-      padding: theme.spacing(1, 1, 1, 0),
-      paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-      transition: theme.transitions.create('width'),
-      width: '100%',
-      [theme.breakpoints.up('md')]: {
-        width: '20ch',
-      },
-    },
-    bg: {
-      
-      backgroundColor: '#b3b3b3 !important',
-      color: 'black !important',
-      padding: '10px',
-      borderRadius : '10px',
-      height:'90px'
-    }
-  
-
-  });
+});
 
 
-  
-class Header extends Component{
-  
 
 
-    constructor(){
-        super();
-        this.state={
-            posts : [],
-            search: '',
-            photo : null,
-            anchorEl : null,
-            searchInput : "",
-         
-            
-       
+class Header extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            anchorEl: false,
+            open: false,
+            anchorRef: false,
+            prevOpen: null,
+            loggedIn: false,
+            profilemenu: false,
+            profile_picture: ""
+
         }
+
     }
 
     componentDidMount() {
-      // Get profile picture
-      let data = null;
-      let xhr = new XMLHttpRequest();
-      let that = this;
-      
-     if(this.props.loggedIn==="true"){
-      xhr.addEventListener("readystatechange", function () {
-          if (this.readyState === 4) {
-              that.setState({
-                  photo: JSON.parse(this.responseText).data.profile_picture
-              });
-          }
-      });
-      xhr.open("GET", this.props.baseUrl+"?access_token="+sessionStorage.getItem("access-token"));
-      xhr.setRequestHeader("Cache-Control", "no-cache");
-      xhr.send(data);
+        let that = this;
+        var data = sessionStorage.getItem("LoggedIn");
+        if (data === "true") {
+            this.setState({ loggedIn: true });
+        }
 
-      // Get posts 
-      let postData = null;
-      let xhrPosts = new XMLHttpRequest();
-      xhrPosts.addEventListener("readystatechange", function () {
-          if (this.readyState === 4) {
-              that.setState({
-                  posts :JSON.parse(this.responseText).data
-          
-              });
-          }
-      });
-     
-      xhrPosts.open("GET", this.props.baseUrl+"/media/recent?access_token="+sessionStorage.getItem("access-token"));
-      xhrPosts.setRequestHeader("Cache-Control", "no-cache");
-      xhrPosts.send(postData);
-
-      
     }
-  }
-    
-  
-    updateSearch = e => {
-        this.setState({ search : e.target.value });
-      };
 
-      handleClick = (event) => {
-         this.setState({anchorEl : event.currentTarget });
-         
-      };
-    
-      handleClose = () => {
-        this.setState({anchorEl : null });
-      };
-    
-     /*
-   
-      profilePageHandler =(e) => {
-      }
+    handleToggle = () => {
+        this.setState({ open: true });
+    };
 
-      LogoutHandler =()=>{
+    handleClose = (event) => {
+        this.setState({ open: false });
+    };
+
+
+    loggoutclickhandler = (e) => {
+
+
+        sessionStorage.setItem("LoggedIn", "false");
+        sessionStorage.removeItem("LoggedIn");
         sessionStorage.removeItem("access-token");
+        this.setState({ loggedIn: false });
+        //this.props.history.push('/');
+        window.location.href = "/";
 
-      } */
+    }
+
+    searchfieldChangeHandler = event => {
+        //alert(event.target.value);
+        this.props.parentCallback(event.target.value);
+    }
+
+    // onTrigger = (event) => {
+    //     this.props.parentCallback("Data from child");
+    //     event.preventDefault();
+    // }
 
 
-    render(){
-    const { classes } = this.props;
-     
-     
-        return(
-          
+    render() {
+
+        return (
             <div>
                 <header className="app-header">
-                   <span className="side-logo">Image Viewer</span>
-                   
-                    
-                   
-                    {this.props.loggedIn ==="true"?
-                       <div className="after-login">
-                         <IconButton style={{padding :'0'}} onClick={this.handleClick}>  
-                          
-                            <img src={this.state.photo} alt=""
-                            style={{width: 40, height: 40, borderRadius: 40/2}} />
-                          </IconButton>
-                         
-                            <Menu
-                                className="simple-menu"
-                                elevation={0}
-                                getContentAnchorEl={null}
-                                anchorEl={this.state.anchorEl}
-                                anchorOrigin={{
-                                  vertical: 'bottom',
-                                  horizontal: 'center',
-                                }}
-                                transformOrigin={{
-                                  vertical: 'top',
-                                  horizontal: 'center',
-                                }}
-                                
-                                keepMounted
-                                open={Boolean(this.state.anchorEl)}
-                                onClose={this.handleClose}>
-                              <div className={classes.bg}>
-                              {this.props.showSearchTab === "true" ?
-                                 <div> <MenuItem onClose={this.handleClose} onClick={this.profilePageHandler}>
-                                   <Link to={"/profile" } loggedin = "true">
-                                      My Account
-                                      </Link>
-                                   </MenuItem><hr/> </div>
-                                :""}
-                              
-                              <MenuItem onClose={this.handleClose}  onClick={this.LogoutHandler}>
-                               <Link to={"/" } loggedin = "false">
-                                Logout
-                                </Link>
-                                </MenuItem>
-                              </div> 
-                            </Menu>
-                           
-                          
-                              
-                        </div>
-                                      :
-                                      ""
-                        
-                    }
+                    <Link to="/home">
+                        <span className="app-logo" alt="Image Viewer App Logo">Image Viewer</span>
+                    </Link>
+                    <div className="login-button">
+                        {this.props.loggedIn === true
+                            ?
+                            <div>
+                                {this.props.showsearchbox === true ?
+                                    <TextField
+                                        id="searchfilled"
+                                        variant="outlined"
+                                        style={{ backgroundColor: "#c0c0c0" }}
+                                        placeholder="Search…"
+                                        InputProps={{
+                                            startAdornment: (
+                                                <InputAdornment>
+                                                    <IconButton>
+                                                        <SearchIcon />
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            )
+                                        }}
+                                        onChange={this.searchfieldChangeHandler}
+                                    />
+                                    :
+                                    ""
+                                }
+                                <IconButton onClick={this.handleToggle} className="profilebutton">
+                                    <img src={profile_picture} id="profilepicture"></img>
+                                </IconButton>
+                                {
+                                    this.props.showaccountment === true ?
+                                        <div>
+                                            <Popper className="popperdropdown" open={this.state.open} anchorEl={this.state.anchorEl} role={undefined} transition disablePortal>
+                                                {({ TransitionProps, placement }) => (
+                                                    <Grow
+                                                        {...TransitionProps}
+                                                        style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                                                    >
+                                                        <Paper id="poppermenu">
+                                                            <ClickAwayListener onClickAway={this.handleClose}>
+                                                                <MenuList id="menulist" autoFocusItem={this.state.open} >
+                                                                    {
+                                                                        this.props.profilemenu === true ?
+                                                                            <div>
+                                                                                <MenuItem>
+                                                                                    <Typography>
+                                                                                        <Link to="profile">
+                                                                                            <span style={{ fontWeight: "bold" }}>My Account</span>
+                                                                                        </Link>
+                                                                                    </Typography>
+                                                                                </MenuItem>
+                                                                                <Divider></Divider>
+                                                                            </div>
+                                                                            :
+                                                                            ""
+                                                                        // <div>
+                                                                        //     <MenuItem>
+                                                                        //         <Typography>
+                                                                        //             <Link to="/home">
+                                                                        //                 <span style={{ fontWeight: "bold" }}>Home Page</span>
+                                                                        //             </Link>
+                                                                        //         </Typography>
+                                                                        //     </MenuItem>
+                                                                        //     <Divider></Divider>
+                                                                        // </div>
+                                                                    }
+                                                                    {
+                                                                        this.props.onloginprofilemenu === true ?
+                                                                            <div>
+                                                                                <MenuItem>
+                                                                                    <Typography>
+                                                                                        <span style={{ fontWeight: "bold" }} onClick={this.loggoutclickhandler}>Logout</span>
+                                                                                    </Typography>
+                                                                                </MenuItem>
+                                                                            </div>
+                                                                            :
+                                                                            ""
+                                                                    }
 
-                                            
-                     
+                                                                </MenuList>
+                                                            </ClickAwayListener>
+                                                        </Paper>
+                                                    </Grow>
+                                                )}
+                                            </Popper>
+                                        </div>
+                                        :
+                                        ""
+                                }
 
-                   
-                    {this.props.loggedIn === "true" && this.props.showSearchTab === "true"
-                        ?
-                       
-                  
-                        <div className={classes.search}>
-                        <div className={classes.searchIcon}>
-                          <SearchIcon/>
-                          
-                    
-                        </div>
-                      
-                        <InputBase
-                          placeholder="Search…"
-                          classes={{
-                            root: classes.inputRoot,
-                            input: classes.inputInput,
-                          }}
-                          inputProps={{ 'aria-label': 'search' }}
-                          onChange={this.props.searchHandler}
-                          />
-                      </div>
-                     
-                    
-                        
-                        : ""
-                    }
-                    
+                            </div>
+                            : ""
+                        }
 
-                    
 
+                    </div>
                 </header>
-         
-          
-   
-           </div>
+            </div>
         )
     }
 }
 
+// export default Header;
 export default withStyles(styles)(Header);
